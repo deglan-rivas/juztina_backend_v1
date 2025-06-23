@@ -9,7 +9,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 const qdrant = new QdrantClient({ url: process.env.QDRANT_HOST! });
 const COLLECTION = process.env.QDRANT_COLLECTION!;
 
-export async function retrieveRelevantChunks(query: string, topK = 5) {
+export async function retrieveRelevantChunks(query: string, topK = 100) {
   // const model = ai.getGenerativeModel({ model: "text-embedding-004" });
   const result = await ai.models.embedContent({
     model: "text-embedding-004",
