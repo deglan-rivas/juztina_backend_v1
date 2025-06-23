@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 // import OpenAI from 'openai';
 import { GoogleGenAI } from '@google/genai';
 
-import { orthographyCheckUseCase, sergioUseCase } from './use-cases';
+import { orthographyCheckUseCase, sergioUseCase, getSemanticContext } from './use-cases';
 import { OrthographyDto, SergioDto } from './dtos';
 
 @Injectable()
@@ -22,6 +22,12 @@ export class GptService {
 
   async sergioCheck(sergioDto: SergioDto) {
     return await sergioUseCase( this.openai, {
+      prompt: sergioDto.prompt
+    });
+  }
+
+  async getSemanticContext(sergioDto: SergioDto) {
+    return await getSemanticContext( this.openai, {
       prompt: sergioDto.prompt
     });
   }

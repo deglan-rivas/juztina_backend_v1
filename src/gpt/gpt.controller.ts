@@ -21,4 +21,11 @@ export class GptController {
     return this.gptService.sergioCheck(sergioDto);
   }
 
+  @Post('get-semantic-context')
+  getSemanticContext(
+    @Body() sergioDto: SergioDto,
+  ) {
+    return this.gptService.getSemanticContext(sergioDto);
+  }
+
 }
