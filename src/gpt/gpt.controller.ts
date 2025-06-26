@@ -28,4 +28,11 @@ export class GptController {
     return this.gptService.getSemanticContext(sergioDto);
   }
 
+  @Post('ask-graph-rag')
+  askGraphRag(
+    @Body() sergioDto: SergioDto,
+  ) {
+    return this.gptService.askGraphRag(sergioDto);
+  }
+
 }
