@@ -5,7 +5,8 @@ import { askToGemini } from './askToGemini';
 import * as dotenv from "dotenv";
 dotenv.config();
 
-export async function queryQdrant(question: string): Promise<{ answer: string }> {
+// export async function queryQdrant(question: string): Promise<{ answer: string }> {
+export async function queryQdrant(question: string): Promise<any> {
   const COLLECTION_NAME = process.env.QDRANT_COLLECTION!;;
   const embedding = await getEmbedding(question);
 
@@ -17,6 +18,15 @@ export async function queryQdrant(question: string): Promise<{ answer: string }>
     //   chunks es de tipo unknown[]
 //   const chunks = searchResult.map(hit => hit.payload?.text || 'Texto no disponible');
   console.log("chunks encontrados: ", searchResult.length);
+  const concatenatedChunks =  searchResult.map((hit, i) => {
+    const payload = hit.payload || {};
+    return `(${i + 1}) [${payload.type || 'Sin tipo'} - ${payload.law_id || 'Sin ID'}]\n${payload.text || 'Texto no disponible'}`;
+  }).join('\n\n');
+
+  return {
+    question,
+    concatenatedChunks,
+  };
 
   const explanation = await askToGemini({
     prompt: `

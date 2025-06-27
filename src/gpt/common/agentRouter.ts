@@ -1,6 +1,9 @@
 import { detectQueryIntent } from "./detectQueryIntent";
 import { interpretCypherResult } from "./interpretCypherResult";
+import { interpretHybridResult } from "./interpretHybridResult";
+import { interpretQdrantResult } from "./interpretQdrantResult";
 import { queryNeo4j, combineResults } from "./queryDBs";
+import { queryHybrid } from "./queryHybrid";
 import { queryQdrant } from "./queryQdrant";
 
 export async function routeQuery(question: string) {
@@ -28,14 +31,21 @@ export async function routeQuery(question: string) {
         };
   
       case "semantic":
-        const semanticResult = await queryQdrant(question);
-        return { answer: semanticResult.answer, route: 'semantic' };
+        // const semanticResult = await queryQdrant(question);
+        const qdrantResult = await queryQdrant(question);
+        const qdrantExplanation = await interpretQdrantResult(qdrantResult);
+        // return { answer: semanticResult.answer, route: 'semantic' };
+        return { answer: qdrantExplanation, route: 'semantic' };
   
-    //   case "hybrid":
+      case "hybrid":
+        // TODO el caso hybrid no debería buscar en ambas DB's en paralelo, sino que primero filtrar usando los grafos, extraer el type con id y luego usar ambos para filtrar la búsqueda vectorial de embeddings limitándose a todos los chunks que coincidan con el type y el id
     //     const graphResult = await queryNeo4j(question);
     //     const semanticResult = await queryQdrant(question);
     //     return combineResults(graphResult, semanticResult);
-  
+        const hybridResult = await queryHybrid(question);
+        const hybridExplanation = await interpretHybridResult(hybridResult);
+        return { answer: hybridExplanation, route: 'hybrid' };
+
       case "unknown":
       default:
         return {
