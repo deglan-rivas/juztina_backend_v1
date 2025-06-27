@@ -1,6 +1,7 @@
 import { detectQueryIntent } from "./detectQueryIntent";
 import { interpretCypherResult } from "./interpretCypherResult";
-import { queryNeo4j, queryQdrant, combineResults } from "./queryDBs";
+import { queryNeo4j, combineResults } from "./queryDBs";
+import { queryQdrant } from "./queryQdrant";
 
 export async function routeQuery(question: string) {
     // const { queryType, reason } = await detectQueryIntent(question);
@@ -27,7 +28,8 @@ export async function routeQuery(question: string) {
         };
   
       case "semantic":
-        return await queryQdrant(question);
+        const semanticResult = await queryQdrant(question);
+        return { answer: semanticResult.answer, route: 'semantic' };
   
     //   case "hybrid":
     //     const graphResult = await queryNeo4j(question);

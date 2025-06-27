@@ -48,10 +48,10 @@ Solo devuelve el Cypher como respuesta sin explicaciones ni formato Markdown.
     }
 }
 
-export async function queryQdrant(question: string): Promise<QueryResult> {
-    // Aquí va el embedding → búsqueda en Qdrant → recuperación del chunk
-    return { answer: "Consulta ejecutada en Qdrant" };
-}
+// export async function queryQdrant(question: string): Promise<QueryResult> {
+//     // Aquí va el embedding → búsqueda en Qdrant → recuperación del chunk
+//     return { answer: "Consulta ejecutada en Qdrant" };
+// }
 
 export function combineResults(graphResult: any, semanticResult: any): QueryResult {
     return {

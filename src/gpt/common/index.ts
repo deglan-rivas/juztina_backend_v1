@@ -1,3 +1,6 @@
 export * from './agentRouter'
 export * from './detectQueryIntent'
 export * from './queryDBs'
+export * from './getEmbedding'
+export * from './qdrantClient'
+export * from './queryQdrant'
