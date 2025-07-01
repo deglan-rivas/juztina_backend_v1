@@ -37,3 +37,28 @@ export async function detectQueryIntent(question: string): Promise<string> {
 
     return response
 }
+
+export async function splitIntention(question: string): Promise<{ graphQuestion: string, semanticQuestion: string}> {
+    const prompt = `
+        Eres un experto clasificando la dividiendo la intención de las preguntas jurídicas en dos partes:
+        - "graphQuestion": si involucra relaciones entre normas jurídicas, personas, instituciones, provincias o citas.
+        - "semanticQuestion": si la pregunta está directamente al contenido semántico.
+
+        Ejm:
+        Pregunta de Ejemplo: "¿Qué resoluciones del 2025 que tienen competencia en Lima citan normas de tipo 'Memorando'? y qué mencionan sobre el “plan estratégico”?" - Respuesta: "{'graphQuestion': '¿Qué resoluciones del 2025 que tienen competencia en Lima citan normas de tipo 'Memorando'?', 'semanticQuestion': 'qué mencionan sobre el “plan estratégico”?'}"
+
+        Pregunta Real: """${question}"""
+        Dame un JSON con las dos partes de la pregunta, sin explicaciones ni formato Markdown.
+    `;
+
+    let response = await askToGemini({
+        model: MODEL,
+        prompt: prompt,
+    });
+
+    if (response.startsWith('```json') || response.startsWith('```')) {
+        response = response.replace(/^```json\s*|```$/g, '').trim();
+      }
+
+    return JSON.parse(response)
+}
