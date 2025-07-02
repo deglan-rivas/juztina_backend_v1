@@ -9,3 +9,6 @@ ReAjustar el modelado de grafos incluyendo las Resoluciones como Normas (Jurídi
 
 ## 2. Printear Logs
 Agregar un logger para calcular tiempos, tokens consumidos, mostrar funciones completadas ( o errores ) y guardar provisionalmente la data como un filesystem como un .txt o en una base de datos como mongoDB
+
+## 3. Mejorar Agent Router
+Mejorar el router basado en búsquedas de grafos y semánticas: en un futuro implementar librerías como LangGraph o LangChain y separar el backend en tools usando MCP
