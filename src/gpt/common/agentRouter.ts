@@ -33,7 +33,9 @@ export async function routeQuery(question: string) {
       case "semantic":
         // const semanticResult = await queryQdrant(question);
         const qdrantResult = await queryQdrant(question);
+        // console.log("qdrantResult ", qdrantResult);
         const qdrantExplanation = await interpretQdrantResult(qdrantResult);
+        // console.log("qdrantExplanation ", qdrantExplanation);
         // return { answer: semanticResult.answer, route: 'semantic' };
         return { answer: qdrantExplanation, route: 'semantic' };
 

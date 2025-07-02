@@ -17,7 +17,7 @@ export const askGraphRag = async( openai: any,  options: Options ) => {
   console.log(respuesta);
 
   return {
-    respuesta
+    message: respuesta
   }
   
 }

@@ -2,10 +2,10 @@ import { askToGemini } from "./askToGemini";
 
 export async function interpretQdrantResult({
     question,
-    concantenatedChunks
+    concatenatedChunks
   }: {
     question: string;
-    concantenatedChunks: string;
+    concatenatedChunks: string;
   }): Promise<string> {
     const explanation = await askToGemini({
       prompt: `
@@ -15,7 +15,7 @@ export async function interpretQdrantResult({
   ${question}
   
   Fragmentos encontrados:
-  ${concantenatedChunks}
+  ${concatenatedChunks}
   
   Explica una posible respuesta basada en los fragmentos.
       `
