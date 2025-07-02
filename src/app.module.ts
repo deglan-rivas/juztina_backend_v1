@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { GptModule } from './gpt/gpt.module';
 import { SeedModule } from './seed/seed.module';
+import { BackupModule } from './backup/backup.module';
 
 
 @Module({
@@ -10,6 +11,7 @@ import { SeedModule } from './seed/seed.module';
     ConfigModule.forRoot(),
     GptModule,
     SeedModule,
+    BackupModule,
   ]
 })
 export class AppModule {}
