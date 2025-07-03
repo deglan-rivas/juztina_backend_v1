@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GptModule } from './gpt/gpt.module';
 import { SeedModule } from './seed/seed.module';
 import { BackupModule } from './backup/backup.module';
+import { EtlModule } from './etl/etl.module';
 
 
 @Module({
@@ -12,6 +13,7 @@ import { BackupModule } from './backup/backup.module';
     GptModule,
     SeedModule,
     BackupModule,
+    EtlModule,
   ]
 })
 export class AppModule {}
