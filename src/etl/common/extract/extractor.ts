@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GraphQLParams, GraphQLResponse, Hit } from "../entities/etl.entity";
+import { GraphQLParams, GraphQLResponse, Hit } from "../../entities/etl.entity";
 
 export async function extractData(params: GraphQLParams): Promise<Hit[]> {
   const query = {

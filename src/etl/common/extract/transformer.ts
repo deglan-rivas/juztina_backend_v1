@@ -2,7 +2,7 @@ import axios from "axios";
 // import { JSDOM } from "jsdom";
 import * as cheerio from "cheerio";
 
-import { Hit } from "../entities/etl.entity";
+import { Hit } from "../../entities/etl.entity";
 
 // interface ParsedHTML {
 //   title: string;
