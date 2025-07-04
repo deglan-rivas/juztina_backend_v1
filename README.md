@@ -70,7 +70,7 @@ Antes de ejecutar el endpoint, descarga los archivos necesarios:
 
 ```bash
 # Descarga y descomprime los archivos de seed
-curl -L -o src/backup/data/seed_data.zip https://github.com/deglan-rivas/juztina_backend_v1/releases/download/test_release/seed_data.zip
+mkdir -p src/backup/data && curl -L -o src/backup/data/seed_data.zip https://github.com/deglan-rivas/juztina_backend_v1/releases/download/test_release/seed_data.zip
 unzip src/backup/data/seed_data.zip -d src/backup/data/
 ````
 
@@ -124,10 +124,8 @@ docker compose down
 ```bash
 cd ..
 rm -rf demo
-# se sugiere borrar los volúmenes de docker usando el 'docker prune' o borrando los volúmenes manualmente de esta forma
-# docker volume prune
-# docker volume ls
-# docker volume rm demo_mongo_data demo_neo4j_data demo_qdrant_data
+# se sugiere borrar manualmente los volúmenes de docker
+docker volume rm demo_mongo_data demo_neo4j_data demo_qdrant_data
 ```
 
 ---
