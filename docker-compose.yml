@@ -6,7 +6,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - graph_rag_resoluciones_graph_mongo_data:/data/db
+      - mongo_data:/data/db
 
   neo4j:
     image: neo4j:5.26.8
@@ -16,19 +16,29 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/testpassword
     volumes:
-      - graph_rag_resoluciones_neo4j_data:/data
+      - neo4j_data:/data
 
   qdrant:
     image: qdrant/qdrant
     ports:
       - "6333:6333"
     volumes:
-      - graph_rag_resoluciones_qdrant_data:/qdrant/storage
+      - qdrant_data:/qdrant/storage
 
 volumes:
-  graph_rag_resoluciones_graph_mongo_data:
-    external: true
-  graph_rag_resoluciones_neo4j_data:
-    external: true
-  graph_rag_resoluciones_qdrant_data:
-    external: true
+  mongo_data:
+  neo4j_data:
+  qdrant_data:
+
+# NOTE add 'external' label to your volumes if you want to use existing volumes and modify tag 'volumes' per each service
+# qdrant:
+#     image: qdrant/qdrant
+#     ports:
+#       - "6333:6333"
+#     volumes:
+#       - graph_rag_resoluciones_qdrant_data:/qdrant/storage
+# volumes:
+#   graph_rag_resoluciones_neo4j_data:
+#     external: true
+#   graph_rag_resoluciones_qdrant_data:
+#     external: true

@@ -15,7 +15,7 @@ mkdir demo && cd demo
 ### 2. Clonar el repositorio
 
 ```bash
-git clone https://github.com/deglan-rivas/juztina_backend_v1.git .
+git clone --depth=3 https://github.com/deglan-rivas/juztina_backend_v1.git .
 ```
 
 ### 3. Instalar las dependencias
@@ -116,6 +116,7 @@ docker compose down
 ```bash
 cd ..
 rm -rf demo
+docker volume rm graph_rag_resoluciones_graph_mongo_data graph_rag_resoluciones_neo4j_data graph_rag_resoluciones_qdrant_data
 ```
 
 ---
