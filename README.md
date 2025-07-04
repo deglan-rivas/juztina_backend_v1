@@ -66,9 +66,17 @@ pnpm start:dev
 
 ### 7. Poblar las bases de datos con el seed
 
-Puedes hacerlo con:
+Antes de ejecutar el endpoint, descarga los archivos necesarios:
 
-#### cURL
+```bash
+# Descarga y descomprime los archivos de seed
+curl -L -o src/backup/data/seed_data.zip https://github.com/deglan-rivas/juztina_backend_v1/releases/download/test_release/seed_data.zip
+unzip src/backup/data/seed_data.zip -d src/backup/data/
+````
+
+> Alternativamente, descarga manualmente desde: [https://drive.google.com/file/d/1swhVZV4BHhY_NzgUix_SOVJxI5Z_dN0t/view?usp=sharing](https://drive.google.com/file/d/1swhVZV4BHhY_NzgUix_SOVJxI5Z_dN0t/view?usp=sharing)
+
+Luego ejecuta:
 
 ```bash
 curl -X POST http://localhost:3000/seed/populate
@@ -116,7 +124,10 @@ docker compose down
 ```bash
 cd ..
 rm -rf demo
-docker volume rm graph_rag_resoluciones_graph_mongo_data graph_rag_resoluciones_neo4j_data graph_rag_resoluciones_qdrant_data
+# se sugiere borrar los volúmenes de docker usando el 'docker prune' o borrando los volúmenes manualmente de esta forma
+# docker volume prune
+# docker volume ls
+# docker volume rm demo_mongo_data demo_neo4j_data demo_qdrant_data
 ```
 
 ---
